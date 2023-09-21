@@ -7,6 +7,45 @@
 // Scripts
 // 
 
+function submitToAPI(e) {
+    e.preventDefault();
+    var URL = "https://j7g34jk665hwo3quv7cktgp2pe0wfimk.lambda-url.us-east-1.on.aws";
+
+    var name = $("#name").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+    var message = $("#message").val();
+    var data = {
+       name : name,
+       phone : phone,
+       email : email,
+       message : message
+     };
+
+    $.ajax({
+      method: "POST",
+      url : URL,
+      dataType: "json",
+      crossDomain: "true",
+      contentType: "application/json; charset=utf-8",
+      headers: {
+        "accept": "application/json",
+        },
+      data: JSON.stringify(data),
+
+      
+      success: function () {
+        // clear form and show a success message
+        alert("Mensagem enviada!");
+        document.getElementById("contactForm").reset();
+    
+      },
+      error: function () {
+        // show an error message
+        alert("Erro ao enviar mensagem");
+      }});
+  }
+
 window.addEventListener('DOMContentLoaded', event => {
 
     // Navbar shrink function
